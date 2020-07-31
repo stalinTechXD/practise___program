@@ -105,7 +105,51 @@ int getminnode(struct node *root){
             }
             return root;
  }
+ 
+ int count(struct node *root){
+     int x,y;
+     if(root!=NULL){
+         x = count(root->left);
+         y = count(root->right);
+         return x+y+1;
+     }
+     return 0;
+ }
 
+
+  int height(struct node *root){
+     int x,y;
+     if(root!=NULL){
+         x =  height(root->left);
+         y =  height(root->right);
+         if(x>y){
+             return x+1;
+         }
+         else{
+             return y+1;
+         }
+     }
+     return 0;
+ }
+ int leaves(struct node *root){
+     int count = 0;
+     if(root != NULL){
+         return 0;
+     }
+     else {
+         leaves(root ->left);
+
+         leaves(root->right);
+        if(root->left == NULL && root -> right == NULL)
+            return count ++;
+         
+            
+            
+     } 
+     return -1;
+         
+         
+ }
 
 int main(){
     struct node *root = NULL;
@@ -117,7 +161,12 @@ int main(){
     search(root,500);
     root  = removenode(root , 500);
     inorder(root);
-
+    int c = count(root);
+   cout<<"the count of a binary search tree is "<<c<<endl;
+    int p = height(root);
+    cout<<"the height of a binary search tree is "<<p<<endl;
+    int q = leaves(root);
+    cout<<"the leaves nodes"<<q<<endl;
  
     return 0;
 }

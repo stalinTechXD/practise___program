@@ -28,7 +28,8 @@ void display(vector<int> &v)
     cout<<"\n";
 }
 
-int main(){
+int main()
+{
     vector<int> v;
     int n;
     clock_t t;

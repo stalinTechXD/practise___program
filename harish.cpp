@@ -1,6 +1,7 @@
 #include<iostream>
 #include<bits/stdc++.h>
 using namespace std;
+ 
 
 struct node
 {
@@ -131,25 +132,41 @@ int getminnode(struct node *root){
      }
      return 0;
  }
+ 
  int leaves(struct node *root){
-     int count = 0;
      if(root != NULL){
-         return 0;
+         int x = leaves(root->left);
+         int y = leaves(root->right);
+         if (root->left == NULL && root->right == NULL){
+            return x+y+1;
+         }
+         else
+         {
+             return x+y;
+         }
+             
      }
-     else {
-         leaves(root ->left);
+     return 0;
+ }    
 
-         leaves(root->right);
-        if(root->left == NULL && root -> right == NULL)
-            return count ++;
-         
-            
-            
-     } 
-     return -1;
-         
-         
- }
+  void preorder(struct node *root){
+    if (root == NULL){
+        return ;
+    }
+    cout <<(root ->key) <<endl;
+    preorder(root->left);
+    
+    preorder(root->right);
+}   
+ void postorder(struct node *root){
+    if (root == NULL){
+        return ;
+    }
+    postorder(root->left);
+   
+    postorder(root->right);
+     cout <<(root ->key) <<endl;
+}
 
 int main(){
     struct node *root = NULL;
@@ -157,6 +174,10 @@ int main(){
     root = insert(root,150);
     root = insert(root,50);
     root = insert(root,500);
+    root = insert(root,5700);
+    root = insert(root,55600);
+
+    root = insert(root,56500);
     inorder(root);
     search(root,500);
     root  = removenode(root , 500);
@@ -166,7 +187,11 @@ int main(){
     int p = height(root);
     cout<<"the height of a binary search tree is "<<p<<endl;
     int q = leaves(root);
-    cout<<"the leaves nodes"<<q<<endl;
+    cout<<"the count of leaves "<<q<<endl;
+    preorder(root);
+    cout<<"--------------------------------------------------------------";
+    postorder(root);
+  
  
     return 0;
 }
